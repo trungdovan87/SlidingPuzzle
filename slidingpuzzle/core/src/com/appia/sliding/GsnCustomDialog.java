@@ -7,24 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 
-public class GsnCustomDialog extends Group {
-    Image[] buttons;
-    private Image dialogBG;
-    //private GsnLabel contentLabel;
-    private Label contentLabel;
-    private BitmapFont font;
+class GsnCustomDialog extends Group {
 
     public GsnCustomDialog(String title, BitmapFont font, Image background, Image... buttons) {
-        this.dialogBG = background;
-        this.font = font;
+        addActor(background);
+        setWidth(background.getWidth());
+        setHeight(background.getHeight());
 
-        this.buttons = buttons;
-        addActor(dialogBG);
-        setWidth(dialogBG.getWidth());
-        setHeight(dialogBG.getHeight());
-
-        for (int i = 0; i < buttons.length; i++)
-            addActor(buttons[i]);
+        for (Image button : buttons) addActor(button);
 
         if (buttons.length == 2) {
             ActorUtility.setRatio(buttons[0], 0.5f, 0f, getWidth() * 0.25f, getHeight() * 0.1f);
@@ -35,7 +25,7 @@ public class GsnCustomDialog extends Group {
                 ActorUtility.setRatio(buttons[i], 0.5f, 0, tmp * (i + 1), getHeight() * 0.1f);
         }
 
-        contentLabel = new Label(title, new Label.LabelStyle(font, new Color(1, 1, 1, 1)));
+        Label contentLabel = new Label(title, new Label.LabelStyle(font, new Color(1, 1, 1, 1)));
         contentLabel.setAlignment(Align.center);
         addActor(contentLabel);
         contentLabel.setWidth(0.8f * getWidth());

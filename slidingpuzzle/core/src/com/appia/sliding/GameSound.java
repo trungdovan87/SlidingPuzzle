@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 public class GameSound {
-	private static GameSound _instance = new GameSound();
+	private static final GameSound _instance = new GameSound();
 
 	public static GameSound instance() {
 		return _instance;
@@ -15,7 +15,7 @@ public class GameSound {
 
 	public boolean enable = true;
 
-	public void playSound(Sound sound) {
+	private void playSound(Sound sound) {
 		if (enable) {
 			sound.play();
 		}

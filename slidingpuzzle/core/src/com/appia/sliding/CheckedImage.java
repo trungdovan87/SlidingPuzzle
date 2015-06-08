@@ -5,9 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class CheckedImage extends Image {
-	private Drawable uncheckDraw;
-	private Drawable checkDraw;	
+class CheckedImage extends Image {
+	private final Drawable uncheckDraw;
+	private final Drawable checkDraw;
 	private boolean check = false;
 	public CheckedImage(TextureRegion uncheckRegion, TextureRegion checkRegion ) {
 		super(uncheckRegion);

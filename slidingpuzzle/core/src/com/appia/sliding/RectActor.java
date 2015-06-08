@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class RectActor extends Actor {
-    private float x, y, width, height;
-    private ShapeRenderer shapeRenderer;
+class RectActor extends Actor {
+    private final float x;
+    private final float y;
+    private final float width;
+    private final float height;
+    private final ShapeRenderer shapeRenderer;
 
     public RectActor(float x, float y, float width, float height) {
         this.x = x;

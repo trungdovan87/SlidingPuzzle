@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class SlidingGame extends Game {
 	SpriteBatch batch;
 	Texture img;
-	MyStage stage;
+	private MyStage stage;
 	@Override
 	public void create () {
 		

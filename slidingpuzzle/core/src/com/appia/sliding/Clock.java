@@ -6,12 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
-;
-
-public class Clock extends Group {
+class Clock extends Group {
 	private float seconds;
 	private boolean pause;
-	private Label label;
+	private final Label label;
 
 	public Clock(BitmapFont font, Color color) {
 		seconds = 0;

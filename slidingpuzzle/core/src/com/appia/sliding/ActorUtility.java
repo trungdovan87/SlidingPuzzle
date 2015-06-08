@@ -2,7 +2,7 @@ package com.appia.sliding;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class ActorUtility {
+class ActorUtility {
 	public static void setCenter(Actor actor, float x, float y) {
 		setRatio(actor, 0.5f, 0.5f, x, y);
 	}

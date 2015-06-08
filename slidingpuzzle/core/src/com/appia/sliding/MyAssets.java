@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class MyAssets {
 	
-	private static MyAssets _inst = new MyAssets();
+	private static final MyAssets _inst = new MyAssets();
 	public static MyAssets instance()
 	{
 		return _inst;

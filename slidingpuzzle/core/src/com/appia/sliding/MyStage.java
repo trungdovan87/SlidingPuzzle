@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class MyStage extends Stage {
+class MyStage extends Stage {
 	private static final String TAG = MyStage.class.getSimpleName();
 
 	public MyStage(Viewport viewport) {
@@ -22,10 +22,6 @@ public class MyStage extends Stage {
 	private CheckedImage lv3Btn;
 	private CheckedImage lv4Btn;
 	private CheckedImage lv5Btn;
-	
-	private Image img0Btn;
-	private Image img1Btn;
-	private Image img2Btn;
 
 	private CheckedImage startBtn;
 	private CheckedImage soundBtn;
@@ -33,7 +29,7 @@ public class MyStage extends Stage {
 	private Clock clock;
 
 	private class ChoseLvlListener extends ClickListener {
-		private int lvl;
+		private final int lvl;
 
 		public ChoseLvlListener(int lvl) {
 			this.lvl = lvl;
@@ -41,7 +37,8 @@ public class MyStage extends Stage {
 
 		@Override
 		public void clicked(InputEvent event, float x, float y) {
-			if (getLvBtn(lvl).isChecked())
+            CheckedImage lvlBtn = getLvBtn(lvl);
+			if (lvlBtn != null && lvlBtn.isChecked())
 				return;
 			GameSound.instance().playClick();
 			if (gameBoard.isInGame())
@@ -54,6 +51,7 @@ public class MyStage extends Stage {
 
 					@Override
 					public void clickNo() {
+                            Gdx.app.debug(TAG, "click N?");
 					}
 				});
 			else 
@@ -78,10 +76,13 @@ public class MyStage extends Stage {
 	}
 
 	private void newLvl(int lvl) {
+		Gdx.app.debug(TAG, "select new Lvl : " + lvl);
 		lv3Btn.setCheck(false);
 		lv4Btn.setCheck(false);
 		lv5Btn.setCheck(false);
-		getLvBtn(lvl).setCheck(true);
+        CheckedImage lvlBtn = getLvBtn(lvl);
+		if (lvlBtn != null)
+			lvlBtn.setCheck(true);
 		gameBoard.setRowColumn(lvl, lvl);
 		init();
 		startBtn.setCheck(false);
@@ -89,7 +90,6 @@ public class MyStage extends Stage {
 
 	public void create() {
 		final TextureAtlas atlas = MyAssets.instance().getAtlas();
-
 		Image background = new Image(atlas.findRegion("background"));
 		background.setWidth(Gdx.graphics.getWidth());
 		background.setHeight(Gdx.graphics.getHeight());
@@ -203,41 +203,41 @@ public class MyStage extends Stage {
 				GameSound.instance().enable = !soundBtn.isChecked();
 			}
 		});
-				
-		img0Btn = new Image(atlas.findRegion("tn_pic0"));
+
+		Image img0Btn = new Image(atlas.findRegion("tn_pic0"));
 		scale = (game.getHeight() * ratioBorder * 0.9f) / img0Btn.getHeight();
 		img0Btn.setSize(img0Btn.getWidth() * scale, img0Btn.getHeight() * scale);
 		img0Btn.setX(game.getWidth() - img0Btn.getWidth() / 0.9f * 0.95f);
 		img0Btn.setY(game.getHeight() / 2 + 0.5f * img0Btn.getHeight());
 		game.addActor(img0Btn);
-		img0Btn.addListener(new ClickListener(){
+		img0Btn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameSound.instance().playClick();
 				gameBoard.setTextureRegion(atlas.findRegion("pic0"));
 			}
 		});
-		
-		
-		img1Btn = new Image(atlas.findRegion("tn_pic1"));
+
+
+		Image img1Btn = new Image(atlas.findRegion("tn_pic1"));
 		img1Btn.setSize(img0Btn.getWidth(), img0Btn.getHeight());
 		img1Btn.setX(img0Btn.getX());
 		img1Btn.setY(game.getHeight() / 2 - 0.5f * img0Btn.getHeight());				
 		game.addActor(img1Btn);
-		img1Btn.addListener(new ClickListener(){
+		img1Btn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameSound.instance().playClick();
 				gameBoard.setTextureRegion(atlas.findRegion("pic1"));
 			}
 		});
-		
-		
-		img2Btn = new Image(atlas.findRegion("tn_pic2"));
+
+
+		Image img2Btn = new Image(atlas.findRegion("tn_pic2"));
 		img2Btn.setSize(img0Btn.getWidth(), img0Btn.getHeight());
 		img2Btn.setX(img0Btn.getX());
 		img2Btn.setY(game.getHeight() / 2 - 1.5f * img0Btn.getHeight());
-		img2Btn.addListener(new ClickListener(){
+		img2Btn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameSound.instance().playClick();
@@ -267,13 +267,13 @@ public class MyStage extends Stage {
 		clock.start();
 	}
 
-	static interface IYesNoListener {
+	interface IYesNoListener {
 		void clickYes();
 
 		void clickNo();
 	}
 
-	Group dialogGroup;
+	private Group dialogGroup;
 	
 	private void showOkDialog(final String text) {
 		dialogGroup = new Group();

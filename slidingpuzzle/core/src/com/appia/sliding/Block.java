@@ -4,11 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Block extends ClickListener{
+class Block extends ClickListener{
 	private Position pos;
 	private Position ori;
 	private Actor actor;
-	private GameBoard gameBoard;
+	private final GameBoard gameBoard;
 	
 	public Block(GameBoard gameBoard, Actor actor, Position ori, Position pos) {
 		this.gameBoard = gameBoard;

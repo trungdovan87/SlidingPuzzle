@@ -12,13 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class GameBoard extends Group {
+class GameBoard extends Group {
 	private static final String TAG = GameBoard.class.getSimpleName();
 
 	private int row;
 	private int col;
 	private TextureRegion img;
-	private TextureRegion border;
+	private final TextureRegion border;
 	private MyStage stage;
 	
 
@@ -33,8 +33,8 @@ public class GameBoard extends Group {
 	private Block[][] board;
 	private Image[][] imgBoard;
 
-	private static int[] dr = { -1, 0, 1, 0 };
-	private static int[] dc = { 0, 1, 0, -1 };
+	private static final int[] dr = { -1, 0, 1, 0 };
+	private static final int[] dc = { 0, 1, 0, -1 };
 	
 	private static int[] random(int length) {
 		int[] result = new int[length];
@@ -71,7 +71,7 @@ public class GameBoard extends Group {
 		this.stage = stage;
 	}
 	
-	public void setCanTouch(boolean canTouch) {
+	private void setCanTouch(boolean canTouch) {
 		this.canTouch = canTouch;
 	}
 	
@@ -211,7 +211,7 @@ public class GameBoard extends Group {
 				if (checkDoneGame()){
 					Gdx.app.log(TAG, "END GAME");
 					stage.doneGame();
-				};
+				}
 			}
 		})));
 	}
