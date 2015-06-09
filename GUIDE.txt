@@ -13,7 +13,7 @@ https://github.com/libgdx/libgdx/wiki/Gradle-and-Intellij-IDEA
     IMPORTANT The port 9876 is used when doing normal GWT development. Therefore, trying to access the game in any other way than using the port 8080 will not launch your project.
 
 2. Gradle Command Lines:
-https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#packaging-the-project
+https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#packaging-the-project	
 
-gradlew desktop:dist
+view -> terminal. Type:  gradlew desktop:dist
 export jar to desktop/build/libs
